@@ -20,7 +20,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     let locationManager = CLLocationManager()
     
     // MARK:
-    // MARK: Load location on map
+    // MARK: View Load
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Set up CoreLocation
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        
+        // Load the map with our annotation
+        loadLocation()
+        
+    }
+    
     func loadLocation() {
         let coordinate = CLLocationCoordinate2D(latitude: 33.777518, longitude: -84.389655)
        
@@ -57,14 +69,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     // MARK:
     // MARK: Geofencing
-    func regionWithAnnotation(annotaiton: MKAnnotation) -> CLCircularRegion {
-        let region = CLCircularRegion(center: annotaiton.coordinate, radius: radius, identifier: annotationIdentifier)
+    func regionWithAnnotation(annotation: MKAnnotation) -> CLCircularRegion {
+        let region = CLCircularRegion(center: annotation.coordinate, radius: radius, identifier: annotationIdentifier)
         region.notifyOnEntry = true
         region.notifyOnExit = true
         return region
     }
     
-    func stopMonitoringAnnotaiton(annotaiton: MKAnnotation) {
+    func stopMonitoringannotation(annotation: MKAnnotation) {
         for region in locationManager.monitoredRegions {
             if let circularRegion = region as? CLCircularRegion {
                 if circularRegion.identifier == annotationIdentifier {
@@ -102,24 +114,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     // MARK:
     // MARK: Map Overlay
     
-    func addRadiusOverlayForLocation(location: MKAnnotation) {
-        mapView?.addOverlay(MKCircle(centerCoordinate: location.coordinate, radius: radius))
-    }
-    
-    func removeRadiusOverlayForLocation(location: MKAnnotation) {
-        if let overlays = mapView?.overlays {
-            for overlay in overlays {
-                if let circleOverlay = overlay as? MKCircle {
-                    let coordinate = circleOverlay.coordinate
-                    if coordinate.latitude == location.coordinate.latitude &&
-                        coordinate.longitude == location.coordinate.longitude &&
-                        circleOverlay.radius == radius {
-                        mapView?.removeOverlay(circleOverlay)
-                        break
-                    }
-                }
-            }
-        }
+    func addRadiusOverlayForLocation(annotation: MKAnnotation) {
+        mapView?.addOverlay(MKCircle(centerCoordinate: annotation.coordinate, radius: radius))
     }
     
     // MARK:
@@ -135,28 +131,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Location Manager failed with the following error: \(error)")
-    }
-    
-    // MARK:
-    // MARK: Button Actions
-    
-    @IBAction func zoomToCurrentLocation(sender: AnyObject) {
-        if let coordinate = mapView.userLocation.location?.coordinate {
-            let region = MKCoordinateRegionMakeWithDistance(coordinate, 10000, 10000)
-            mapView.setRegion(region, animated: true)
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Set up CoreLocation
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-        
-        // Load the map with our annotation
-        loadLocation()
-        
     }
 
     override func didReceiveMemoryWarning() {
