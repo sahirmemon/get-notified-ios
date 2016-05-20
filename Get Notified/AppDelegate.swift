@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import HockeySDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
@@ -17,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // HockeyApp Integration
+        BITHockeyManager.sharedHockeyManager().configureWithIdentifier("f5ccba98472a4ed6a118fa993a06d73c")
+        // Do some additional configuration if needed here
+        BITHockeyManager.sharedHockeyManager().startManager()
+        BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
         
         // Set up location manager delegate
         locationManager.delegate = self
