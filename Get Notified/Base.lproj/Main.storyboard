@@ -8,7 +8,7 @@
         <!--Get Notified-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Get Notified" hidesBottomBarWhenPushed="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="Get_Notified" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Get Notified" extendedLayoutIncludesOpaqueBars="YES" hidesBottomBarWhenPushed="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="Get_Notified" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YBT-2r-EEf">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YBT-2r-EEf">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="64" width="800" height="736"/>
@@ -28,8 +28,13 @@
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="YBT-2r-EEf" secondAttribute="trailing" id="2ue-LC-noV"/>
+                            <constraint firstItem="YBT-2r-EEf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gcR-Rc-qX6"/>
+                            <constraint firstItem="YBT-2r-EEf" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="jsl-3M-OLr"/>
+                            <constraint firstItem="YBT-2r-EEf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rBq-xc-1Mr"/>
+                        </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
