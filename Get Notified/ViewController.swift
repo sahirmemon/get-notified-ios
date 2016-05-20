@@ -30,7 +30,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         // Load the map with our annotation
         loadLocation()
-        
     }
     
     func loadLocation() {
